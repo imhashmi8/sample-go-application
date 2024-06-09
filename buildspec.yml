@@ -9,7 +9,7 @@ phases:
     commands:
       - echo "Starting docker build"
       - docker build -t go-application .
-      - docker tag go-application:v1 381492182373.dkr.ecr.ap-south-1.amazonaws.com/go-application:v1
+      - docker tag go-application 381492182373.dkr.ecr.ap-south-1.amazonaws.com/go-application:v1
   post_build:
     commands:
       - echo "Pushing to ECR repository"
