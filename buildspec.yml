@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  pre_build: 
+    commands:
+      - echo "Logining into ECR repository"
+      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 381492182373.dkr.ecr.ap-south-1.amazonaws.com
+  build: 
+    commands:
+      - echo "Starting docker build"
+      - docker build -t go-application .
+      - docker tag go-application:v1 381492182373.dkr.ecr.ap-south-1.amazonaws.com/go-application:v1
+  post_build:
+    commands:
+      - echo "Pushing to ECR repository"
+      - docker push 381492182373.dkr.ecr.ap-south-1.amazonaws.com/go-application:v1
